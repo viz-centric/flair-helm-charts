@@ -168,8 +168,8 @@ kubectl delete namespace flair
 If you have ran all of this in minikube, you can also delete the minikube vm by running
 
 ```sh
-minikube stop flair
-minikube delete flair
+minikube stop --profile flair
+minikube delete --profile flair
 ```
 
 ## Roadmap
