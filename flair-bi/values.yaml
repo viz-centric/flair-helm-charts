@@ -1,0 +1,37 @@
+# Default values for flair-bi.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: flairbi/flairbi
+  tag: v1.1.2
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8002
+
+env:
+  JHIPSTER_SLEEP: 0
+  SPRING_PROFILES_ACTIVE: kube
+  CONFIG_URI: http://flair-registry:8761
+  EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
+  POSTGRES_URI: flair-bi-pg-postgresql:5432
+  GRPC_SSL_ENABLED: false
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingress:
+  enabled: false
+

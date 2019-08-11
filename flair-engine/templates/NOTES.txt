@@ -1,0 +1,2 @@
+Service details:
+    - Service: {{ include "flair-engine.fullname" . }}:{{ .Values.service.port }}

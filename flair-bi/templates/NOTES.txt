@@ -1,0 +1,5 @@
+Service details:
+    - Service: {{ include "flair-bi.fullname" . }}:{{ .Values.service.port }}
+
+Forward it on to your machine using:
+    kubectl port-forward svc/{{ include "flair-bi.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }}

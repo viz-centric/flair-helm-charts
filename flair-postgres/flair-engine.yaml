@@ -1,0 +1,3 @@
+postgresqlDatabase: flairengine
+postgresqlUsername: postgres
+postgresqlPassword: admin

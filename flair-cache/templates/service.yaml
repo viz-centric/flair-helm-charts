@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "flair-cache.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "flair-cache.name" . }}
+    helm.sh/chart: {{ include "flair-cache.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: cache
+      protocol: TCP
+      name: cache
+  selector:
+    app.kubernetes.io/name: {{ include "flair-cache.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

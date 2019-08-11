@@ -1,0 +1,31 @@
+# Default values for flair-registry.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: flairbi/flair-registry
+  tag: v5.0.3
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  eurekaPort: 8761
+  configPort: 8762
+
+env:
+  JHIPSTER_SLEEP: 0
+  SPRING_PROFILES_ACTIVE: prod
+  BITBUCKET_URI: https://github.com/viz-centric/flair-config.git
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

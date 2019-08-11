@@ -1,0 +1,3 @@
+postgresqlDatabase: flairbi
+postgresqlUsername: postgres
+postgresqlPassword: admin
