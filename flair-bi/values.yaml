@@ -2,11 +2,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: flairbi/flairbi
-  tag: v1.1.2
+  tag: latest
   pullPolicy: Always
 
 nameOverride: ""
@@ -35,3 +35,5 @@ affinity: {}
 ingress:
   enabled: false
 
+annotations:
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"

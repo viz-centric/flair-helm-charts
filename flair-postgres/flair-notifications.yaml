@@ -1,3 +1,7 @@
 postgresqlDatabase: flairnotify
 postgresqlUsername: postgres
 postgresqlPassword: admin
+
+master:
+  podAnnotations:
+    sidecar.istio.io/rewriteAppHTTPProbers: "true"

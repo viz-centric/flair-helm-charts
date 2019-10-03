@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tcpsniffer
+  namespace: flair
+  labels:
+    app: tcpsniffer
+spec:
+  containers:
+  - image: corfr/tcpdump
+    command:
+      - sleep
+      - "7200"
+    imagePullPolicy: IfNotPresent
+    name: tcpsniffer
+  restartPolicy: Always

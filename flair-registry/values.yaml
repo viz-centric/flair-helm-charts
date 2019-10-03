@@ -29,3 +29,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+annotations:
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"

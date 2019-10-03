@@ -172,11 +172,109 @@ minikube stop --profile flair
 minikube delete --profile flair
 ```
 
+## Flair with ISTIO Service-Mesh
+
+### Get Istio
+
+```sh
+curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.1 sh -
+cd istio-1.3.1
+export PATH=$PWD/bin:$PATH
+```
+
+### Install CRDs
+```sh
+for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+```
+
+### Setup Istio
+```sh
+# For permissive multual TLS
+kubectl apply -f install/kubernetes/istio-demo.yaml
+```
+
+### Enable mTLS and deploy Flair
+
+```sh
+# Wait until all of the pods in the istio-system are up and running and then start running the following commands
+echo "[INFO] Creating Namespace 'Flair' with Istio Enabled"
+
+kubectl create ns flair 
+kubectl label namespace flair istio-injection=enabled
+
+kubectl apply -f tools/enable-tls.yaml
+kubectl apply -f tools/destination-rule.yaml
+
+echo "[INFO] Installing Flair Registry"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair \
+    flair-registry ./flair-registry
+
+echo "[INFO] Installing Postgres for Flair Engine"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair \
+    --values ./flair-postgres/flair-engine.yaml \
+    flair-engine-pg stable/postgresql
+
+echo "[INFO] Installing Flair Engine"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair \
+    flair-engine ./flair-engine
+
+echo "[INFO] Installing Flair Cache"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair \
+    flair-cache ./flair-cache
+
+echo "[INFO] Installing Postgres for Flair BI"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair \
+    --values ./flair-postgres/flair-bi.yaml \
+    flair-bi-pg stable/postgresql
+
+echo "[INFO] Installing CouchDb for Flair BI"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair \
+    --values ./flair-couchdb/values.yaml \
+    flair-couchdb ./flair-couchdb/couchdb
+
+echo "[INFO] Installing Flair BI"
+helm upgrade \
+    --install \
+    --wait \
+    --namespace flair flair-bi ./flair-bi
+
+echo "[INFO] All services sucessfully installed"
+# Wait until all services are up and running
+kubectl port-forward svc/flair-bi 8002:8002
+```
+
+
+### Sniffing traffic from FLAIRBI to FLAIRENGINE
+```sh
+kubectl exec -it <ANY_FLAIRBI_POD> -c istio-proxy
+ifconfig
+sudo tcpdump -vvvv -A -nn -i eth0 '(dst port 6565)'
+```
+
+### Install Flair Platform
+
 ## Roadmap
 
 ### New Services
-* Flair Notification 
-* Flair Pulsar
 
+* Flair Operator
 
 > Note: If you are planning to deploy flair in any other way, please let us know and we can help you out developing and deploying it.
