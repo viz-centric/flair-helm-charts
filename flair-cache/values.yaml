@@ -21,7 +21,7 @@ env:
   SPRING_PROFILES_ACTIVE: kube
   CONFIG_URI: http://flair-registry:8761
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
-  GRPC_SSL_ENABLED: false
+  GRPC_SSL_ENABLED: true
 
 resources: {}
 

@@ -36,20 +36,19 @@ spec:
             - name: engine
               containerPort: 6565
               protocol: TCP
+            - name: health
+              containerPort: 8080
+              protocol: TCP
           livenessProbe:
-            exec:
-              command:
-                - grpc_health_probe
-                - -addr=:6565
-                - -connect-timeout=3s
-            initialDelaySeconds: 125
+            httpGet:
+              path: /health
+              port: health
+            initialDelaySeconds: 150
             timeoutSeconds: 5
           readinessProbe:
-            exec:
-              command:
-                - grpc_health_probe
-                - -addr=:6565
-                - -connect-timeout=3s
+            httpGet:
+              path: /health
+              port: health
             initialDelaySeconds: 120
             timeoutSeconds: 5
           resources:
