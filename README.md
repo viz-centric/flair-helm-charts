@@ -189,6 +189,42 @@ helm upgrade \
     --namespace flair flair-bi ./flair-bi
 ```
 
+## Flair with ISTIO Service-Mesh
+
+### Get Istio
+
+```sh
+curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.1 sh -
+cd istio-1.3.1
+export PATH=$PWD/bin:$PATH
+```
+
+### Install CRDs
+```sh
+for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+```
+
+### Setup Istio
+```sh
+# For permissive multual TLS
+kubectl apply -f install/kubernetes/istio-demo.yaml
+```
+
+### Enable mTLS and deploy Flair
+
+```sh
+./secure-mesh.sh
+# Wait until all services are up and running
+# aws-athena-query-results-689779572241-eu-west-2
+```
+
+### Sniffing traffic from FLAIRBI to FLAIRENGINE
+```sh
+kubectl exec -it <ANY_FLAIRBI_POD> -c istio-proxy
+ifconfig
+sudo tcpdump -vvvv -A -nn -i eth0 '(dst port 6565)'
+```
+
 ## Accessing Flair in Kubernetes
 
 Once all the services are up and running you can access Flair BI to start visualizing data.
@@ -240,45 +276,6 @@ If you have ran all of this in minikube, you can also delete the minikube vm by 
 minikube stop --profile flair
 minikube delete --profile flair
 ```
-
-## Flair with ISTIO Service-Mesh
-
-### Get Istio
-
-```sh
-curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.1 sh -
-cd istio-1.3.1
-export PATH=$PWD/bin:$PATH
-```
-
-### Install CRDs
-```sh
-for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
-```
-
-### Setup Istio
-```sh
-# For permissive multual TLS
-kubectl apply -f install/kubernetes/istio-demo.yaml
-```
-
-### Enable mTLS and deploy Flair
-
-```sh
-./secure-mesh.sh
-# Wait until all services are up and running
-kubectl port-forward svc/flair-bi 8002:8002
-# aws-athena-query-results-689779572241-eu-west-2
-```
-
-### Sniffing traffic from FLAIRBI to FLAIRENGINE
-```sh
-kubectl exec -it <ANY_FLAIRBI_POD> -c istio-proxy
-ifconfig
-sudo tcpdump -vvvv -A -nn -i eth0 '(dst port 6565)'
-```
-
-### Install Flair Platform
 
 ## Roadmap
 
