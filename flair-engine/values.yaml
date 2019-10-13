@@ -22,7 +22,7 @@ env:
   CONFIG_URI: http://flair-registry:8761
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
   POSTGRES_URI: flair-engine-pg-postgresql:5432
-  GRPC_SSL_ENABLED: true
+  GRPC_SSL_ENABLED: false
 
 resources: {}
 

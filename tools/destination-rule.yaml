@@ -1,10 +1,44 @@
+---
 apiVersion: "networking.istio.io/v1alpha3"
 kind: "DestinationRule"
 metadata:
-  name: "default"
-  namespace: "flair"
+  name: "flairbi-istio-client-mtls"
+  namespace: flair
 spec:
-  host: "*.flair.svc.cluster.local"
+  host: flair-bi.flair.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "flair-engine-istio-client-mtls"
+  namespace: flair
+spec:
+  host: flair-engine.flair.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "flair-cache-istio-client-mtls"
+  namespace: flair
+spec:
+  host: flair-cache.flair.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "flair-notifications-istio-client-mtls"
+  namespace: flair
+spec:
+  host: flair-notifications.flair.svc.cluster.local
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

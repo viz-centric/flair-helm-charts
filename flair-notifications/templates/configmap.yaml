@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "flair-notifications.fullname" . }}
+  labels:
+{{ include "flair-notifications.labels" . | indent 4 }}
+data:
+  application-kube.yml: |
+    port: 8080
+    imageFolder: ./images/
+    grpcEndPoint: flair-engine:6565
+    mailService:
+        serive: gmail
+        sender: admin-vizcentric@gmail.com
+        testUser: admin@vizcentric.com
+        auth :
+        user: vizcentric.smtp@gmail.com
+        pass:

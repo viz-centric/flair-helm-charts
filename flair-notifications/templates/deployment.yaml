@@ -1,26 +1,27 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "flair-engine.fullname" . }}
+  name: {{ include "flair-notifications.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "flair-engine.name" . }}
-    helm.sh/chart: {{ include "flair-engine.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "flair-notifications.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "flair-engine.name" . }}
+      app.kubernetes.io/name: {{ include "flair-notifications.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "flair-engine.name" . }}
+        app.kubernetes.io/name: {{ include "flair-notifications.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
       annotations:
 {{ toYaml .Values.annotations | indent 8 }}
     spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -33,17 +34,17 @@ spec:
     {{- end}}
 {{- end }}
           ports:
-            - name: engine
-              containerPort: 6565
+            - name: grpc
+              containerPort: 8091
               protocol: TCP
-            - name: http-health
-              containerPort: 8080
+            - name: http
+              containerPort: 8090
               protocol: TCP
           livenessProbe:
             exec:
               command:
                 - grpc_health_probe
-                - -addr=:6565
+                - -addr=:8091
                 - -connect-timeout=3s
             initialDelaySeconds: 125
             timeoutSeconds: 5
@@ -51,21 +52,28 @@ spec:
             exec:
               command:
                 - grpc_health_probe
-                - -addr=:6565
+                - -addr=:8091
                 - -connect-timeout=3s
             initialDelaySeconds: 120
             timeoutSeconds: 5
           resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: configuration
+              mountPath: /flair-config
+      volumes:
+        - name: configuration
+          configMap:
+            name: {{ include "flair-notifications.fullname" . }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
     {{- end }}

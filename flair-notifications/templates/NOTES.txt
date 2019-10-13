@@ -1,0 +1,2 @@
+Service details:
+    - Service: {{ include "flair-notifications.fullname" . }}:{{ .Values.service.port }}

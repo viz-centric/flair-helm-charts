@@ -1,27 +1,27 @@
-# Default values for flair-bi.
+# Default values for flair-notifications.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: flairbi/flairbi
+  repository: flairbi/flair-notifications
   tag: latest
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 8002
+  port: 8091
 
 env:
-  JHIPSTER_SLEEP: 0
-  SPRING_PROFILES_ACTIVE: kube
-  CONFIG_URI: http://flair-registry:8761
+  APP_CONFIG: /flair-config/application-kube.yml
+  NODE_ENV: kube
+  SLEEP_TIME: 60
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
-  POSTGRES_URI: flair-bi-pg-postgresql:5432
   GRPC_SSL_ENABLED: false
 
 resources: {}
@@ -31,9 +31,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-ingress:
-  enabled: false
-
-annotations:
-  sidecar.istio.io/rewriteAppHTTPProbers: "true"
