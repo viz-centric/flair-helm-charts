@@ -6,13 +6,25 @@ metadata:
 {{ include "flair-notifications.labels" . | indent 4 }}
 data:
   application-kube.yml: |
-    port: 8080
-    imageFolder: ./images/
+    httpPort: 8090
+    grpcPort: 8091
+    imageFolder: /flair-notifications/images
     grpcEndPoint: flair-engine:6565
+    FlairBiEndPoint: http://flair-bi:8002
+    discovery:
+        eureka:
+            url: http://admin:admin@flair-registry:8761/eureka
+    ssl:
+        enabled: false
+        caCert: certs/trustCertCollectionFile.crt
+        serverCert: certs/certChainFile.crt
+        serverKey: certs/privateKeyFile.key
     mailService:
-        serive: gmail
+        serive: sendgrid
         sender: admin-vizcentric@gmail.com
         testUser: admin@vizcentric.com
-        auth :
-        user: vizcentric.smtp@gmail.com
-        pass:
+        host: smtp.sendgrid.net
+        port: 587
+        auth:
+            user: <key name>
+            pass: <password>
