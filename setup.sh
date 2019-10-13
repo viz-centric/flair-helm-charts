@@ -2,7 +2,6 @@
 
 echo "[INFO] Creating Namespace 'Flair'"
 kubectl create ns flair
-kubectl label namespace flair istio-injection=enabled
 
 docker pull flairbi/flair-registry:v5.0.3
 docker pull flairbi/flair-engine:latest
