@@ -18,6 +18,8 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "flair-engine.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+{{ toYaml .Values.annotations | indent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -33,6 +35,9 @@ spec:
           ports:
             - name: engine
               containerPort: 6565
+              protocol: TCP
+            - name: http-health
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             exec:

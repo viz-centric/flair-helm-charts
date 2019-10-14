@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flair-notifications.fullname" . }}
+  labels:
+{{ include "flair-notifications.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "flair-notifications.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "flair-notifications.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+{{ toYaml .Values.annotations | indent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.env }}
+          env:
+    {{- range $key, $val := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+    {{- end}}
+{{- end }}
+          ports:
+            - name: grpc
+              containerPort: 8091
+              protocol: TCP
+            - name: http
+              containerPort: 8090
+              protocol: TCP
+        #   livenessProbe:
+        #     exec:
+        #       command:
+        #         - grpc_health_probe
+        #         - -addr=:8091
+        #         - -connect-timeout=3s
+        #     initialDelaySeconds: 125
+        #     timeoutSeconds: 5
+        #   readinessProbe:
+        #     exec:
+        #       command:
+        #         - grpc_health_probe
+        #         - -addr=:8091
+        #         - -connect-timeout=3s
+        #     initialDelaySeconds: 120
+        #     timeoutSeconds: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: configuration
+              mountPath: /flair-config
+      volumes:
+        - name: configuration
+          configMap:
+            name: {{ include "flair-notifications.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

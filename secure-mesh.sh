@@ -1,7 +1,10 @@
 #!/bin/bash
 
-echo "[INFO] Creating Namespace 'Flair'"
+# Wait until all of the pods in the istio-system are up and running and then start running the following commands
+echo "[INFO] Creating Namespace 'Flair' with Istio Enabled"
+
 kubectl create ns flair
+kubectl label namespace flair istio-injection=enabled
 
 docker pull flairbi/flair-registry:v5.0.3
 docker pull flairbi/flair-engine:latest
@@ -76,5 +79,7 @@ helm upgrade \
     --install \
     --wait \
     --namespace flair flair-bi ./flair-bi
+
+kubectl apply -f tools/destination-rule.yaml
 
 echo "[INFO] All services sucessfully installed"

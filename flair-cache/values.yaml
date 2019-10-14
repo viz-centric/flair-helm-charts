@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: flairbi/flair-cache
-  tag: v1.1.1
+  tag: latest
   pullPolicy: Always
 
 nameOverride: ""
@@ -30,3 +30,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+annotations:
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"

@@ -1,1 +1,4 @@
 adminPassword: password
+
+annotations:
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"

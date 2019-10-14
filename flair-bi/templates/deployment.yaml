@@ -18,6 +18,8 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "flair-bi.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+{{ toYaml .Values.annotations | indent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -38,13 +40,13 @@ spec:
             httpGet:
               path: /health
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 180
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: /health
               port: http
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             timeoutSeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}

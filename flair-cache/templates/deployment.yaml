@@ -18,6 +18,8 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "flair-cache.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+{{ toYaml .Values.annotations | indent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
