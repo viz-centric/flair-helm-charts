@@ -45,11 +45,11 @@ Pull down all necessary images for deployment
 
 ```sh
 docker pull flairbi/flair-registry:v5.0.3
-docker pull flairbi/flair-engine:latest
-docker pull flairbi/flair-cache:latest
-docker pull flairbi/flair-notifications:latest
+docker pull flairbi/flair-engine:v2.2.5-SNAPSHOT.c873a96
+docker pull flairbi/flair-cache:v2.2.2-SNAPSHOT.2f59747
+docker pull flairbi/flair-notifications:2.1.3-SNAPSHOT.119
 docker pull couchdb:2.3.1
-docker pull flairbi/flairbi:latest
+docker pull flairbi/flairbi:v2.2.1-SNAPSHOT.e1a39e43
 ```
 
 ### Repository and environment setup

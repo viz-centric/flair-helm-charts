@@ -53,6 +53,12 @@ spec:
             timeoutSeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+        {{- if .Values.secretName }}
+          volumeMounts:
+            - name: secrets
+              mountPath: "/opt/flair/secrets"
+              readOnly: true
+        {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
@@ -64,4 +70,10 @@ spec:
     {{- with .Values.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.secretName }}
+      volumes:
+        - name: secrets
+          secret:
+            secretName: {{ .Values.secretName }}
     {{- end }}

@@ -6,12 +6,14 @@ replicaCount: 1
 
 image:
   repository: flairbi/flair-notifications
-  tag: 1.3.12-SNAPSHOT.4
+  tag: 2.1.3-SNAPSHOT.119
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+# secretName: flair-notifications-secret
 
 service:
   type: ClusterIP

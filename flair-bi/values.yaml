@@ -6,11 +6,13 @@ replicaCount: 1
 
 image:
   repository: flairbi/flairbi
-  tag: latest
+  tag: v2.2.1-SNAPSHOT.e1a39e43
   pullPolicy: Always
 
 nameOverride: ""
 fullnameOverride: ""
+
+# secretName: flair-bi-secret
 
 service:
   type: ClusterIP

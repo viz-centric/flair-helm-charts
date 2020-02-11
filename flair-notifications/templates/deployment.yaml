@@ -41,19 +41,15 @@ spec:
               containerPort: 8090
               protocol: TCP
         #   livenessProbe:
-        #     exec:
-        #       command:
-        #         - grpc_health_probe
-        #         - -addr=:8091
-        #         - -connect-timeout=3s
-        #     initialDelaySeconds: 125
+        #     httpGet:
+        #       path: /health
+        #       port: http
+        #     initialDelaySeconds: 180
         #     timeoutSeconds: 5
         #   readinessProbe:
-        #     exec:
-        #       command:
-        #         - grpc_health_probe
-        #         - -addr=:8091
-        #         - -connect-timeout=3s
+        #     httpGet:
+        #       path: /health
+        #       port: http
         #     initialDelaySeconds: 120
         #     timeoutSeconds: 5
           resources:
@@ -61,10 +57,20 @@ spec:
           volumeMounts:
             - name: configuration
               mountPath: /flair-config
+        {{- if .Values.secretName }}
+            - name: secrets
+              mountPath: "/opt/flair/secrets"
+              readOnly: true
+        {{- end }}
       volumes:
         - name: configuration
           configMap:
             name: {{ include "flair-notifications.fullname" . }}
+    {{- if .Values.secretName }}
+        - name: secrets
+          secret:
+            secretName: {{ .Values.secretName }}
+    {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
