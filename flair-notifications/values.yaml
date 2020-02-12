@@ -13,7 +13,8 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-# secretName: flair-notifications-secret
+# Secret mount to be used if any secret files are needed to be added to the container during startup
+# secretMountName: flair-secret
 
 service:
   type: ClusterIP
@@ -25,6 +26,16 @@ env:
   SLEEP_TIME: 60
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
   GRPC_SSL_ENABLED: false
+
+# Can be used if you want to set environment variables from a secret
+# The key names need to be the same as the environment variables you want to set
+# You would have to make sure the secret is created with the same key names as the environment variables you would like to set
+
+# secretEnv:
+#   name: flair-secret
+#   keys:
+#     - FLAIR_SECRET_USERNAME
+#     - FLAIR_SECRET_PASSWORD
 
 resources: {}
 

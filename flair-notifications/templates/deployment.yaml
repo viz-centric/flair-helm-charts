@@ -26,11 +26,22 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-{{- if .Values.env }}
           env:
+            - name: FLAIR_COMPONENT
+              value: "flair-notifications"
+{{- if .Values.env }}
     {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               value: {{ $val | quote }}
+    {{- end}}
+{{- end }}
+{{- if .Values.secretEnv.keys }}
+    {{- range .Values.secretEnv.keys }}
+            - name: {{ . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.secretEnv.name }}
+                  key: {{ . }}
     {{- end}}
 {{- end }}
           ports:
@@ -57,7 +68,7 @@ spec:
           volumeMounts:
             - name: configuration
               mountPath: /flair-config
-        {{- if .Values.secretName }}
+        {{- if .Values.secretMountName }}
             - name: secrets
               mountPath: "/opt/flair/secrets"
               readOnly: true
@@ -66,10 +77,10 @@ spec:
         - name: configuration
           configMap:
             name: {{ include "flair-notifications.fullname" . }}
-    {{- if .Values.secretName }}
+    {{- if .Values.secretMountName }}
         - name: secrets
           secret:
-            secretName: {{ .Values.secretName }}
+            secretName: {{ .Values.secretMountName }}
     {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
