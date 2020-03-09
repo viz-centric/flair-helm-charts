@@ -4,12 +4,12 @@ echo "[INFO] Creating Namespace 'Flair'"
 kubectl create ns flair
 
 docker pull flairbi/flair-registry:v5.0.3
-docker pull flairbi/flair-engine:v2.2.5-SNAPSHOT.c873a96
+docker pull flairbi/flair-engine:v2.4.0
 docker pull flairbi/flair-cache:v2.2.2-SNAPSHOT.2f59747
-docker pull flairbi/flair-notifications:2.1.3-SNAPSHOT.119
+docker pull flairbi/flair-notifications:2.4.1
 docker pull docker.io/bitnami/postgresql:10.7.0
 docker pull couchdb:2.3.1
-docker pull flairbi/flairbi:v2.2.1-SNAPSHOT.e1a39e43
+docker pull flairbi/flairbi:v2.4.1-SNAPSHOT.eb12f144
 
 echo "[INFO] Installing Flair Registry"
 helm upgrade \

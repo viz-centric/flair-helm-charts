@@ -7,12 +7,12 @@ kubectl create ns flair
 kubectl label namespace flair istio-injection=enabled
 
 docker pull flairbi/flair-registry:v5.0.3
-docker pull flairbi/flair-engine:latest
+docker pull flairbi/flair-engine:v2.4.0
 docker pull flairbi/flair-cache:latest
-docker pull flairbi/flair-notifications:1.3.12-SNAPSHOT.4
+docker pull flairbi/flair-notifications:2.4.1
 docker pull docker.io/bitnami/postgresql:10.7.0
 docker pull couchdb:2.3.1
-docker pull flairbi/flairbi:latest
+docker pull flairbi/flairbi:v2.4.1-SNAPSHOT.eb12f144
 
 echo "[INFO] Installing Flair Registry"
 helm upgrade \
