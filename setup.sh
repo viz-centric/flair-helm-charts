@@ -3,7 +3,7 @@
 echo "[INFO] Creating Namespace 'Flair'"
 kubectl create ns flair
 
-docker pull flairbi/flair-registry:v5.0.8
+docker pull flairbi/flair-registry:v5.0.6.ae1e037
 docker pull flairbi/flair-engine:v2.5.0
 docker pull flairbi/flair-cache:v2.2.2-SNAPSHOT.2f59747
 docker pull flairbi/flair-notifications:2.5.1
