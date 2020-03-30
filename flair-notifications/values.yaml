@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: flairbi/flair-notifications
-  tag: 2.1.3-SNAPSHOT.123
+  tag: 2.5.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -36,6 +36,13 @@ env:
 #   keys:
 #     - FLAIR_SECRET_USERNAME
 #     - FLAIR_SECRET_PASSWORD
+#     - DATABASE_USERNAME
+#     - DATABASE_PASSWORD
+#     - DATABASE_NAME
+#     - DATABASE_HOSTNAME
+#     - DATABASE_PORT
+#     - DATABASE_DIALECT
+#     - EUREKA_URL
 
 resources: {}
 

@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: flairbi/flairbi
-  tag: v2.2.1-SNAPSHOT.e1a39e43
+  tag: v2.5.1
   pullPolicy: Always
 
 nameOverride: ""

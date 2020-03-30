@@ -10,7 +10,6 @@ data:
     grpcPort: 8091
     imageFolder: /flair-notifications/images
     compressImageFolder: /flair-notifications/compressImages
-    grpcEndPoint: flair-engine:6565
     discovery:
         eureka:
             url: http://admin:admin@flair-registry:8761/eureka
