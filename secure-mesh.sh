@@ -9,7 +9,7 @@ kubectl label namespace flair istio-injection=enabled
 docker pull flairbi/flair-registry:v5.0.6.ae1e037
 docker pull flairbi/flair-engine:v2.5.0
 docker pull flairbi/flair-cache:v2.2.2-SNAPSHOT.2f59747
-docker pull flairbi/flair-notifications:2.5.1
+docker pull flairbi/flair-notifications:2.5.2
 docker pull docker.io/bitnami/postgresql:10.7.0
 docker pull couchdb:2.3.1
 docker pull flairbi/flairbi:v2.5.1
