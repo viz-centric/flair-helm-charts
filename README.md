@@ -44,12 +44,13 @@ Since we now have the prerequisites necessary for us to deploy flair services so
 Pull down all necessary images for deployment
 
 ```sh
-docker pull flairbi/flair-registry:v5.0.3
-docker pull flairbi/flair-engine:latest
-docker pull flairbi/flair-cache:latest
-docker pull flairbi/flair-notifications:latest
+docker pull flairbi/flair-registry:v5.0.6.ae1e037
+docker pull flairbi/flair-engine:v2.5.0
+docker pull flairbi/flair-cache:v2.2.2-SNAPSHOT.2f59747
+docker pull flairbi/flair-notifications:2.5.2
+docker pull docker.io/bitnami/postgresql:10.7.0
 docker pull couchdb:2.3.1
-docker pull flairbi/flairbi:latest
+docker pull flairbi/flairbi:v2.5.1
 ```
 
 ### Repository and environment setup

@@ -9,8 +9,7 @@ data:
     httpPort: 8090
     grpcPort: 8091
     imageFolder: /flair-notifications/images
-    grpcEndPoint: flair-engine:6565
-    FlairBiEndPoint: http://flair-bi:8002
+    compressImageFolder: /flair-notifications/compressImages
     discovery:
         eureka:
             url: http://admin:admin@flair-registry:8761/eureka
@@ -19,12 +18,3 @@ data:
         caCert: certs/trustCertCollectionFile.crt
         serverCert: certs/certChainFile.crt
         serverKey: certs/privateKeyFile.key
-    mailService:
-        serive: sendgrid
-        sender: admin-vizcentric@gmail.com
-        testUser: admin@vizcentric.com
-        host: smtp.sendgrid.net
-        port: 587
-        auth:
-            user: <key name>
-            pass: <password>

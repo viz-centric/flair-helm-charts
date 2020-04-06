@@ -25,11 +25,22 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-{{- if .Values.env }}
           env:
+            - name: FLAIR_COMPONENT
+              value: "flair-engine"
+{{- if .Values.env }}
     {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               value: {{ $val | quote }}
+    {{- end}}
+{{- end }}
+{{- if .Values.secretEnv.keys }}
+    {{- range .Values.secretEnv.keys }}
+            - name: {{ . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.secretEnv.name }}
+                  key: {{ . }}
     {{- end}}
 {{- end }}
           ports:
@@ -57,6 +68,12 @@ spec:
             timeoutSeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+        {{- if .Values.secretMountName }}
+          volumeMounts:
+            - name: secrets
+              mountPath: "/opt/flair/secrets"
+              readOnly: true
+        {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
@@ -68,4 +85,10 @@ spec:
     {{- with .Values.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.secretMountName }}
+      volumes:
+        - name: secrets
+          secret:
+            secretName: {{ .Values.secretMountName }}
     {{- end }}

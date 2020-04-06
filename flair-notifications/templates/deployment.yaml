@@ -26,11 +26,22 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-{{- if .Values.env }}
           env:
+            - name: FLAIR_COMPONENT
+              value: "flair-notifications"
+{{- if .Values.env }}
     {{- range $key, $val := .Values.env }}
             - name: {{ $key }}
               value: {{ $val | quote }}
+    {{- end}}
+{{- end }}
+{{- if .Values.secretEnv.keys }}
+    {{- range .Values.secretEnv.keys }}
+            - name: {{ . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.secretEnv.name }}
+                  key: {{ . }}
     {{- end}}
 {{- end }}
           ports:
@@ -40,31 +51,37 @@ spec:
             - name: http
               containerPort: 8090
               protocol: TCP
-        #   livenessProbe:
-        #     exec:
-        #       command:
-        #         - grpc_health_probe
-        #         - -addr=:8091
-        #         - -connect-timeout=3s
-        #     initialDelaySeconds: 125
-        #     timeoutSeconds: 5
-        #   readinessProbe:
-        #     exec:
-        #       command:
-        #         - grpc_health_probe
-        #         - -addr=:8091
-        #         - -connect-timeout=3s
-        #     initialDelaySeconds: 120
-        #     timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 150
+            timeoutSeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: configuration
               mountPath: /flair-config
+        {{- if .Values.secretMountName }}
+            - name: secrets
+              mountPath: "/opt/flair/secrets"
+              readOnly: true
+        {{- end }}
       volumes:
         - name: configuration
           configMap:
             name: {{ include "flair-notifications.fullname" . }}
+    {{- if .Values.secretMountName }}
+        - name: secrets
+          secret:
+            secretName: {{ .Values.secretMountName }}
+    {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
