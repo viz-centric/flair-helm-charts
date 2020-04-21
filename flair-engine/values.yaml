@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: flairbi/flair-engine
-  tag: v2.5.0
+  tag: v2.5.1
   pullPolicy: Always
 
 nameOverride: ""
