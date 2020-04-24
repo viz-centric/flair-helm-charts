@@ -3,6 +3,12 @@ replicaCount: 1
 image:
   tag: v2.5.2
 
+service:
+  type: NodePort
+
+ingress:
+  enabled: true
+
 env:
   JHIPSTER_SLEEP: 0
   SPRING_PROFILES_ACTIVE: gke

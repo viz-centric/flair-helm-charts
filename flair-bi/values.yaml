@@ -47,6 +47,7 @@ affinity: {}
 
 ingress:
   enabled: false
+  path: /*
 
 annotations:
   sidecar.istio.io/rewriteAppHTTPProbers: "true"
