@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  tag: 2.5.5
+
+env:
+  APP_CONFIG: /flair-config/application-kube.yml
+  NODE_ENV: kube
+  SLEEP_TIME: 0
+  EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
+  GRPC_SSL_ENABLED: false
+  DATABASE_USERNAME: postgres
+  DATABASE_PASSWORD: admin
+  DATABASE_NAME: flairnotify
+  DATABASE_HOSTNAME: 10.123.96.3
+  DATABASE_PORT: 5432
+  DATABASE_DIALECT: postgres
+  FLAIR_ENGINE: flair-engine:6565

@@ -1,0 +1,13 @@
+clusterSize: 1
+
+persistentVolume:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 5Gi
+  # storageClass: "-"
+
+adminPassword: password
+
+annotations:
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"
