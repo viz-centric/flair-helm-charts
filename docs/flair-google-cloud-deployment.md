@@ -109,8 +109,3 @@ gke-staging-default-pool-b70979c5-tdsk   Ready    <none>   23m   v1.15.11-gke.9 
 ```sh
 -> gcloud sql instances delete staging-pg-instance # --async
 ```
-
-###### Account Details
-
-> Account: vizbigcp@gmail.com
-> Password: T@n@W$Nih@1814$2o10
