@@ -1,27 +1,45 @@
 replicaCount: 1
 
 image:
-  tag: v2.5.2
+  tag: v2.5.3-SNAPSHOT.a7f54c97
 
 service:
   type: NodePort
 
 ingress:
   enabled: true
+  gcp:
+    certificate:
+      create: true
+      domain: cloud.devsupport-vizcentric.com
+  annotations:
+    # kubernetes.io/ingress.global-static-ip-name: flair-bi-cloud
+    networking.gke.io/managed-certificates: flair-bi
+
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "250m"
+  limits:
+    memory: "4Gi"
+    cpu: "1000m"
 
 env:
   JHIPSTER_SLEEP: 0
   SPRING_PROFILES_ACTIVE: gke
   CONFIG_URI: http://flair-registry:8761
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
-  POSTGRES_URI: 10.123.96.3:5432
+  POSTGRES_URI: 10.123.96.5:5432
   POSTGRES_USERNAME: postgres
   POSTGRES_PASSWORD: admin
   COUCHDB_URI: flair-couchdb-svc-couchdb:5984
   COUCHDB_USERNAME: admin
   COUCHDB_PASSWORD: password
   GRPC_SSL_ENABLED: false
-#   OAUTH_CLIENT_ID: xxxx
-#   OAUTH_CLIENT_SECRET: xxxx
-#   OAUTH_ACCESS_TOKEN_URI: xxxx
-#   OAUTH_USER_AUTHORIZATION_URI: xxxx
+  FLAIR_ENGINE: flair-engine:6565
+  FLAIR_NOTIFICATIONS: flair-notifications:8091
+  OAUTH_CLIENT_ID: xxxxxxxxxxxxxxxx
+  OAUTH_CLIENT_SECRET: xxxxxxxxxxxxxxxxxxxxxxxxxx
+  OAUTH_ACCESS_TOKEN_URI: https://your-org.okta.com/oauth2/v1/token
+  OAUTH_USER_AUTHORIZATION_URI: https://your-org.okta.com/oauth2/v1/authorize
+  OAUTH_USER_INFO_URI: https://your-org.okta.com/oauth2/v1/userinfo

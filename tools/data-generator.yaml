@@ -21,7 +21,7 @@ spec:
       - name: CONNECTION_TYPE
         value: postgres
       - name: HOST
-        value: 10.123.96.3
+        value: 10.123.96.5
       - name: PORT
         value: "5432"
       - name: USERNAME
@@ -32,4 +32,3 @@ spec:
         value: logistics
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
-

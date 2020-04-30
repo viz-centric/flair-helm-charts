@@ -23,9 +23,25 @@
   --availability-type=zonal \
   --assign-ip \
   --no-backup
+  
+-> gcloud beta sql instances create staging-pg-config-private \
+  --project flair-staging \
+  --database-version=POSTGRES_11 \
+  --tier=db-g1-small \
+  --zone=us-central1-a \
+  --root-password=admin \
+  --storage-type=SSD \
+  --storage-size=20 \
+  --availability-type=zonal \
+  --network=default \
+  --no-assign-ip \
+  --no-backup
 ```
 
 > **Note**: Manually, disable Public access and enable private access so that a `Private IP` is assigned to the instance. This `IP` needs to be used for connecting to the instance from `GKE`.
+
+
+> You can now go ahead and create databases needed for `Flair` to run. (i.e `flairbi`, `flairengine`, `flairnotify`)
 
 ### GKE cluster
 
@@ -59,6 +75,11 @@
 #### Get Kubeconfig
 ```sh
 -> gcloud beta container clusters get-credentials staging --region us-central1
+```
+
+#### Create a Static IP
+```sh
+-> gcloud compute addresses create flair-bi-cloud --region us-central1
 ```
 
 #### Check Nodes & Labels
@@ -102,7 +123,12 @@ gke-staging-default-pool-b70979c5-tdsk   Ready    <none>   23m   v1.15.11-gke.9 
 
 ### Delete GKE Cluster
 ```sh
--> gcloud container clusters delete staging
+-> gcloud container clusters delete staging --region us-central1
+```
+
+#### Delete Static IP
+```sh
+-> gcloud compute addresses delete flair-bi-cloud --region us-central1
 ```
 
 ### Delete Postgres database

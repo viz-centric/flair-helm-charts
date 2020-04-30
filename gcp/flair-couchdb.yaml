@@ -9,5 +9,13 @@ persistentVolume:
 
 adminPassword: password
 
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "250m"
+  limits:
+    memory: "3Gi"
+    cpu: "500m"
+
 annotations:
   sidecar.istio.io/rewriteAppHTTPProbers: "true"

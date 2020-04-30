@@ -48,6 +48,13 @@ affinity: {}
 ingress:
   enabled: false
   path: /*
+  gcp:
+    certificate:
+      create: false
+      domain: cloud.devsupport-vizcentric.com
+  annotations: {}
+    # kubernetes.io/ingress.global-static-ip-name: flair-gcp-static-ip
+    # networking.gke.io/managed-certificates: flair-bi
 
 annotations:
   sidecar.istio.io/rewriteAppHTTPProbers: "true"

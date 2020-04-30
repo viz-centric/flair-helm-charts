@@ -27,14 +27,6 @@ helm upgrade \
     --namespace flair \
     flair-cache ./flair-cache
 
-echo "[INFO] Installing Flair Notifications"
-helm upgrade \
-    --install \
-    --values ./gcp/flair-notifications.yaml \
-    --wait \
-    --namespace flair \
-    flair-notifications ./flair-notifications
-
 echo "[INFO] Installing CouchDb for Flair BI"
 helm upgrade \
     --install \
@@ -49,5 +41,13 @@ helm upgrade \
     --values ./gcp/flair-bi.yaml \
     --wait \
     --namespace flair flair-bi ./flair-bi
+
+echo "[INFO] Installing Flair Notifications"
+helm upgrade \
+    --install \
+    --values ./gcp/flair-notifications.yaml \
+    --wait \
+    --namespace flair \
+    flair-notifications ./flair-notifications
 
 echo "[INFO] All services sucessfully installed"
