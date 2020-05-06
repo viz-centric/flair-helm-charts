@@ -2,8 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
 image:
   repository: flairbi/flair-cache
   tag: v2.2.2-SNAPSHOT.2f59747
@@ -30,9 +28,9 @@ env:
 # The key names need to be the same as the environment variables you want to set
 # You would have to make sure the secret is created with the same key names as the environment variables you would like to set
 
-# secretEnv:
-#   name: flair-secret
-#   keys:
+secretEnv:
+  name: flair-secret
+  keys: []
 #     - FLAIR_SECRET_USERNAME
 #     - FLAIR_SECRET_PASSWORD
 

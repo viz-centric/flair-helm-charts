@@ -1,0 +1,17 @@
+image:
+  tag: v2.5.3
+
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "250m"
+  limits:
+    memory: "3Gi"
+    cpu: "500m"
+
+env:
+  JHIPSTER_SLEEP: 0
+  SPRING_PROFILES_ACTIVE: gke
+  CONFIG_URI: http://flair-registry:8761
+  EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
+  GRPC_SSL_ENABLED: false

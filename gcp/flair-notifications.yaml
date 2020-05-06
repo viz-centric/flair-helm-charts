@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  tag: 2.5.7-SNAPSHOT.19
+
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "250m"
+  limits:
+    memory: "3Gi"
+    cpu: "1000m"
+
+env:
+  APP_CONFIG: /flair-config/application-kube.yml
+  EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
+  NODE_ENV: kube
+  SLEEP_TIME: 0
+  GRPC_SSL_ENABLED: false
+  DATABASE_PASSWORD: admin
+  DATABASE_USERNAME: postgres
+  DATABASE_NAME: flairnotify
+  DATABASE_HOSTNAME: 10.123.96.5
+  DATABASE_PORT: 5432
+  DATABASE_DIALECT: postgres
+  FLAIR_ENGINE: flair-engine:6565
+  FLAIR_BI: flair-bi:8002

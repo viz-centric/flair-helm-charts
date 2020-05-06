@@ -3,7 +3,7 @@ echo "[INFO] Removing Flair Services"
 for service in $(helm ls --namespace flair -q);
 do
     echo "[INFO] Deleting Flair Service: ${service}";
-    helm delete ${service} --purge;
+    helm delete ${service};
 done
 
 echo "[INFO] All services sucessfully deleted!"

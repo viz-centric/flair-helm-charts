@@ -1,0 +1,15 @@
+{{- if .Values.ingress.gcp.certificate.create -}}
+{{- $fullName := include "flair-bi.fullname" . -}}
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app.kubernetes.io/name: {{ include "flair-bi.name" . }}
+    helm.sh/chart: {{ include "flair-bi.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  domains:
+    - {{ .Values.ingress.gcp.certificate.domain }}
+{{- end }}

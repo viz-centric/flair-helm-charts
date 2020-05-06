@@ -1,0 +1,23 @@
+replicaCount: 2
+
+image:
+  tag: v2.5.5
+
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "250m"
+  limits:
+    memory: "4Gi"
+    cpu: "1000m"
+
+env:
+  JHIPSTER_SLEEP: 0
+  EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
+  SPRING_PROFILES_ACTIVE: grpc,gke
+  CONFIG_URI: http://flair-registry:8761
+  POSTGRES_URI: 10.123.96.5:5432
+  POSTGRES_USERNAME: postgres
+  POSTGRES_PASSWORD: admin
+  GRPC_SSL_ENABLED: false
+  FLAIR_CACHE: flair-cache:6565
