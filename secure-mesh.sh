@@ -27,7 +27,7 @@ helm upgrade \
     --wait \
     --namespace flair \
     --values ./flair-postgres/flair-engine.yaml \
-    flair-engine-pg stable/postgresql
+    flair-engine-pg bitnami/postgresql
 
 echo "[INFO] Installing Flair Engine"
 helm upgrade \
@@ -49,7 +49,7 @@ helm upgrade \
     --wait \
     --namespace flair \
     --values ./flair-postgres/flair-notifications.yaml \
-    flair-notifications-pg stable/postgresql
+    flair-notifications-pg bitnami/postgresql
 
 echo "[INFO] Installing Flair Notifications"
 helm upgrade \
@@ -64,7 +64,7 @@ helm upgrade \
     --wait \
     --namespace flair \
     --values ./flair-postgres/flair-bi.yaml \
-    flair-bi-pg stable/postgresql
+    flair-bi-pg bitnami/postgresql
 
 echo "[INFO] Installing CouchDb for Flair BI"
 helm upgrade \
