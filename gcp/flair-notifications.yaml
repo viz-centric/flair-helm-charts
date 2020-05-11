@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  tag: 2.5.7-SNAPSHOT.10
+  tag: 2.5.7
 
 resources:
   requests:
