@@ -7,6 +7,8 @@ icon: http://couchdb.apache.org/CouchDB-visual-identity/logo/CouchDB-couch-symbo
 maintainers:
 - email: kocolosk@apache.org
   name: kocolosk
+- email: admin@vizcentric.com
+  name: Vizcentric Admin
 name: couchdb
 sources:
 - https://github.com/apache/couchdb
