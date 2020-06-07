@@ -4,6 +4,30 @@ Helm charts in this repository help you deploy `Flair` in Kubernetes environment
 
 > Note: The following instructions have been tested on a GKE cluster and on minikube
 
+## Helm Repo
+
+You can add `Flair Platform` chart repo to and start deploying services. 
+
+```sh
+helm repo add flair-platform https://flair-platform.storage.googleapis.com
+```
+
+If you already have the repo added, consider updating your local index by running
+
+```sh
+helm repo update
+```
+
+### Listing charts
+
+You can list for all the charts available in the `flair-platform` repo by running the following command
+
+```sh
+helm search repo flair-platform
+```
+
+Alternatively, you can follow the steps below, if you wish you deploy charts from the code base itself.
+
 ## Prerequisites
 
 - [Minikube](https://github.com/kubernetes/minikube)
@@ -41,7 +65,7 @@ eval $(minikube docker-env)
 
 Since we now have the prerequisites necessary for us to deploy flair services sorted, we can go ahead and deploy the services in Kubernetes. Please stick to the order as mentioned below.
 
-### Repository and environment setup
+### Local Repository and environment setup
 
 Clone this repository and `cd` into the folder
 
