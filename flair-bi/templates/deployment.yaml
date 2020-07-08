@@ -49,13 +49,13 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /health
+              path: /management/health
               port: http
             initialDelaySeconds: 180
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
-              path: /health
+              path: /management/health
               port: http
             initialDelaySeconds: 120
             timeoutSeconds: 5
