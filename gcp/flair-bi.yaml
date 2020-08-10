@@ -1,8 +1,8 @@
 replicaCount: 2
 
 image:
-  tag: v2.7.0-SNAPSHOT.5c50e4e5
-
+  tag: v2.7.0
+  
 service:
   type: NodePort
 
