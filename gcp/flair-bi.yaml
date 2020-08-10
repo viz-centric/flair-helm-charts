@@ -1,8 +1,8 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
-  tag: v2.6.1
-
+  tag: v2.7.0
+  
 service:
   type: NodePort
 

@@ -1,5 +1,17 @@
 apiVersion: v1
 appVersion: "1.0"
-description: A Helm chart for Kubernetes
+description: Flair Notificartions takes care of event driven alerting and notifies users based on the events they subscribe to.
 name: flair-notifications
+<<<<<<< HEAD
 version: 1.0.1
+=======
+version: 1.0.0
+maintainers:
+- email: admin@vizcentric.com
+  name: Vizcentric Admin
+home: https://www.vizcentric.com/
+icon: https://www.vizcentric.com/images/logo/vc-logo.png
+sources:
+- https://github.com/viz-centric/flair-helm-charts
+- https://github.com/viz-centric/flair-helm-charts/blob/master/docs/flair-google-cloud-deployment.md
+>>>>>>> 45dadb9d4dda2bdfabab44d80b66333dba08921b
