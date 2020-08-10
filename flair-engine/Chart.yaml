@@ -2,7 +2,7 @@ apiVersion: v1
 appVersion: "1.0"
 description: Flair Engine is one of the core components of the flair platform. It handles all queries, interpretations and database connections
 name: flair-engine
-version: 1.0.0
+version: 1.0.1
 maintainers:
 - email: admin@vizcentric.com
   name: Vizcentric Admin
