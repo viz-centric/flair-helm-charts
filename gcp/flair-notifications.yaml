@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  tag: 2.5.12
+  tag: 2.5.15
 
 resources:
   requests:
