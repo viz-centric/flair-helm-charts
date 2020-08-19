@@ -2,7 +2,7 @@ apiVersion: v1
 appVersion: "1.0"
 description: Flair Notificartions takes care of event driven alerting and notifies users based on the events they subscribe to.
 name: flair-notifications
-version: 1.0.1
+version: 1.0.2
 maintainers:
 - email: admin@vizcentric.com
   name: Vizcentric Admin
