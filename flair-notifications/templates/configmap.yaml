@@ -18,3 +18,7 @@ data:
         caCert: certs/trustCertCollectionFile.crt
         serverCert: certs/certChainFile.crt
         serverKey: certs/privateKeyFile.key
+    grpc:
+        auth:
+            username: flair-notifications
+            jwtKey: secretKey1secretKey1secretKey1secretKey1secretKey1secretKey1secretKey1
