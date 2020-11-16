@@ -4,7 +4,7 @@
 
 image:
   repository: flairbi/flair-cache
-  tag: v2.6.3
+  tag: v2.6.4
   pullPolicy: Always
 
 nameOverride: ""
