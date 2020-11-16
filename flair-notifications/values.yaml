@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: flairbi/flair-notifications
-  tag: 2.5.16
+  tag: 2.5.17-SNAPSHOT.13
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
