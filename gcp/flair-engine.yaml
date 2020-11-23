@@ -16,7 +16,7 @@ env:
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
   SPRING_PROFILES_ACTIVE: grpc,gke
   CONFIG_URI: http://flair-registry:8761
-  POSTGRES_URI: 10.123.96.5:5432
+  POSTGRES_URI: 172.17.112.3:5432
   POSTGRES_USERNAME: postgres
   POSTGRES_PASSWORD: admin
   GRPC_SSL_ENABLED: false

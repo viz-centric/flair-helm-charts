@@ -51,7 +51,8 @@
   --project "flair-staging" \
   --region "us-central1" \
   --no-enable-basic-auth \
-  --cluster-version "1.15.11-gke.9" \
+  --cluster-version "1.18.10-gke.2101" \
+  --release-channel "rapid" \
   --machine-type "n1-standard-2" \
   --image-type "COS" \
   --disk-type "pd-ssd" \
@@ -59,7 +60,7 @@
   --metadata disable-legacy-endpoints=true \
   --scopes "https://www.googleapis.com/auth/cloud-platform" \
   --preemptible \
-  --num-nodes "3" \
+  --num-nodes "4" \
   --enable-stackdriver-kubernetes \
   --enable-ip-alias \
   --network "projects/flair-staging/global/networks/default" \
