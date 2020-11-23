@@ -29,7 +29,7 @@ env:
   SPRING_PROFILES_ACTIVE: gke
   CONFIG_URI: http://flair-registry:8761
   EUREKA_URL: http://admin:admin@flair-registry:8761/eureka
-  POSTGRES_URI: 10.123.96.5:5432
+  POSTGRES_URI: 172.17.112.3:5432
   POSTGRES_USERNAME: postgres
   POSTGRES_PASSWORD: admin
   COUCHDB_URI: flair-couchdb-svc-couchdb:5984
