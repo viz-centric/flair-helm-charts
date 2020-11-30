@@ -13,4 +13,4 @@ name: couchdb
 sources:
 - https://github.com/apache/couchdb
 - https://github.com/kocolosk/couchdb-statefulset-assembler
-version: 1.2.2.1
+version: 1.2.3
